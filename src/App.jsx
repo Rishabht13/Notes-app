@@ -8,10 +8,13 @@ function App() {
 
   return (
     <>
-      <NoteInput setNotes={setNotes} />
-      <NotesList notes={notes} setNotes={setNotes} />
+      <div className="app">
+        <h1>Notes App</h1>
+        <NoteInput setNotes={setNotes} />
+        <NotesList notes={notes} setNotes={setNotes} />
+      </div>
     </>
   );
-}
+};
 
 export default App;
