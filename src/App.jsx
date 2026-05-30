@@ -1,11 +1,17 @@
 import { useState } from "react";
 import "./App.css";
 
- function NotesList({notes}) {
+ function NotesList({notes, setNotes}) {
+    function deleteNote(index){
+      setNotes((prev) => prev.filter((_, i) => i !== index));
+    };
   return (
     <ul>
       {notes.map((note, index) => (
-        <li key={index}>{note}</li>
+        <li key={index}>
+          {note}
+          <button onClick={() => deleteNote(index)}>Delete</button>
+        </li>
       ))}
     </ul>
   );
@@ -14,6 +20,7 @@ function NoteInput({setNotes}){
   
     const [input,setInput] = useState("");
      function addNote() {
+      if(input.trim() === "") return; // Prevent adding empty notes
     setNotes((prev)=>[...prev, input]);
     setInput('');
   };
@@ -34,7 +41,7 @@ function App() {
   return (
     <>
       <NoteInput setNotes={setNotes} />
-      <NotesList notes={notes} />
+      <NotesList notes={notes} setNotes={setNotes} />
     </>
   );
 };
